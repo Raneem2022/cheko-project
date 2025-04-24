@@ -1,0 +1,7 @@
+.apple-popup .mapboxgl-popup-content {
+    background-color: transparent;
+    width: 322px;
+    height: 156px;
+    box-shadow: none;
+    border: none;
+}
