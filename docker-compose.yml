@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  # Frontend (react js)
+  frontend:
+    build:
+      context: ./cheko-frontend
+    image: cheko-frontend:latest
+    ports:
+      - "3000:3000"
+    networks:
+      - cheko-net
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./check-backend
+    image: backend:latest
+    ports:
+      - "8080:8080"
+    networks:
+      - cheko-net
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/cheko-db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=vhk,77hk
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_SHOW_SQL=true
+      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    container_name: cheko-db
+    environment:
+      POSTGRES_DB: cheko-db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: vhk,77hk
+    ports:
+      - "5432:5432"
+    networks:
+      - cheko-net
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+
+networks:
+  cheko-net:
+    driver: bridge
+
+volumes:
+  pgdata:
+    driver: local
