@@ -55,7 +55,7 @@ export default function Home() {
         <div className="flex flex-col bg-[#F5F6F8]">
           <Header filterList={categoriesList}  onFilter={handleCategoryClick} onSearch={handleSearch}/>
         </div>
-        <div className="flex flex-col bg-[#F5F6F8] pb-8">
+        <div className="flex flex-col pb-8">
           <HomePage
               menuList={menuList}
               categoriesList={categoriesList}
