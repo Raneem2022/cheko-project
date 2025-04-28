@@ -5,7 +5,7 @@ COPY . .
 RUN mvn clean package -DskipTests
 
 # --- Run stage ---
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:17-jdk
 WORKDIR /app
 EXPOSE 8080
 COPY --from=build /app/target/check-backend-0.0.1-SNAPSHOT.jar /app/check-backend.jar
