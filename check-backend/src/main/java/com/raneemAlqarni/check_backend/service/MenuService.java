@@ -23,6 +23,10 @@ public class MenuService {
         return menuRepository.findById(ItemId).orElseThrow(() -> new RuntimeException("items Not found"));
     }
 
+    public List<menu> getMenuItemByName(String name){
+        return menuRepository.findByName(name);
+    }
+
     public List<menu> getMenuByCategory(String category){
         return menuRepository.findByCategory(category);
     }

@@ -5,11 +5,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.raneemAlqarni.check_backend.domin.menu;
 import com.raneemAlqarni.check_backend.service.MenuService;
@@ -59,5 +55,12 @@ public class MenuController {
         long count = menuService.countItemsByCategory(categoryName);
         return ResponseEntity.ok(count);
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<menu>> searchItems(@RequestParam String keyword) {
+        List<menu> results = menuService.getMenuItemByName(keyword);
+        return ResponseEntity.ok(results);
+    }
+
 
 }
