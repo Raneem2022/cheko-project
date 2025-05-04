@@ -49,3 +49,18 @@ export  const fetchCountItemsByCategory = async (categoryName: string) => {
         throw  error
     }
 };
+
+
+export  const searchItems = async (searchWord: string) => {
+    try {
+        const response = await fetch(`http://localhost:8080/api/menu/search?keyword=${searchWord}`);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        return data;
+    }catch (error) {
+        console.error('Error fetching categories data:', error);
+        throw  error
+    }
+}

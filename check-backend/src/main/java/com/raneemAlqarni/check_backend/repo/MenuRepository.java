@@ -15,4 +15,7 @@ public interface MenuRepository extends JpaRepository<menu, Integer> {
 
     @Query("SELECT DISTINCT m.category FROM menu m ORDER BY m.category ASC")
     List<String> findDistinctCategories();
+
+    @Query("SELECT m FROM menu m WHERE LOWER(m.name) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(m.description) LIKE LOWER(CONCAT('%', :keyword, '%'))")
+    List<menu> findByName(@Param("keyword") String keyword);
 }

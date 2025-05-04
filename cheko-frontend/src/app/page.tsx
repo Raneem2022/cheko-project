@@ -2,7 +2,7 @@
 import Header from "@/app/components/Header";
 import HomePage from "@/app/components/HomePage";
 import {useEffect, useState} from "react";
-import {fetchCategories, fetchMenu, fetchMenuByCategory} from "@/app/api/model";
+import {fetchCategories, fetchMenu, fetchMenuByCategory , searchItems} from "@/app/api/model";
 
 export interface MenuItem {
   id: number;
@@ -39,13 +39,8 @@ export default function Home() {
     }
   };
   const handleSearch = async (searchWord: string) => {
-    const fullMenu = await fetchMenu(); // reload full menu data
-    const filteredItems = fullMenu.filter((item: MenuItem) =>
-        item.name.toLowerCase().includes(searchWord.toLowerCase()) ||
-        item.description.toLowerCase().includes(searchWord.toLowerCase())
-    );
-
-    setMenuList(filteredItems);
+    const searchItem = await searchItems(searchWord);
+    setMenuList(searchItem);
     setSelectedCategory(searchWord + " result");
   };
 
