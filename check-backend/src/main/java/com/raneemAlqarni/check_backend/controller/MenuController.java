@@ -62,5 +62,10 @@ public class MenuController {
         return ResponseEntity.ok(results);
     }
 
+    @GetMapping("/secondHighestCalorie")
+    public ResponseEntity<Integer> secondHighestCalorie() {
+        int results = menuService.findSecondHighestCalorie();
+        return ResponseEntity.ok(results);
+    }
 
 }

@@ -18,4 +18,7 @@ public interface MenuRepository extends JpaRepository<menu, Integer> {
 
     @Query("SELECT m FROM menu m WHERE LOWER(m.name) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(m.description) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     List<menu> findByName(@Param("keyword") String keyword);
+
+    @Query("SELECT MAX(m.calorie) FROM menu m WHERE m.calorie < (SELECT MAX(m2.calorie) FROM menu m2)")
+    int findSecondHighestCalorie();
 }

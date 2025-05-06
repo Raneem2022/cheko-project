@@ -38,4 +38,8 @@ public class MenuService {
     public long countItemsByCategory(String category) {
         return menuRepository.countByCategoryIgnoreCase(category);
     }
+
+    public int findSecondHighestCalorie() {
+        return menuRepository.findSecondHighestCalorie();
+    }
 }
